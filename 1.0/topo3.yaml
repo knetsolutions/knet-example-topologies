@@ -11,22 +11,22 @@ Topology:
     nodes:
       -
         name: a1
-        image: ubuntu:trusty
+        image: sureshkvl/host:latest
         mac: 00:00:00:00:00:01
         network: n1        
       -
         name: a2
-        image: ubuntu:trusty    
+        image: sureshkvl/host:latest   
         mac: 00:00:00:00:00:02
         network: n1        
       -
         name: a3
-        image: ubuntu:trusty  
+        image: sureshkvl/host:latest 
         mac: 00:00:00:00:00:03
         network: n1
       -
         name: a4
-        image: ubuntu:trusty  
+        image: sureshkvl/host:latest 
         mac: 00:00:00:00:00:04
         network: n1
     switches:
