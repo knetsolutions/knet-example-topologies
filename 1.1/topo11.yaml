@@ -46,7 +46,7 @@ Topology:
     routers:
       -
         name: R1
-        image: sureshkvl/router:1-0
+        image: sureshkvl/router:latest
         interfaces:
           -
             name: eth1
