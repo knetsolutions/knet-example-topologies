@@ -1,19 +1,19 @@
 Topology:
-    name : Simple Routing Topology with two Routers
+    name : Simple WAN Topology with two Routers
     version: 1.1
     description: |
       This topology consists of 4 nodes, and two switches,two routers . 
       nodes a1,a2,Router R1 connected to Switch1.  a3,a4 , Router R2 connnected to Switch2.
       Router R1 & R2 are connected
-    controller:
-      url: tcp:0.0.0.0:6633
-    openflow:
-      version: 1.3
-    nodes:
+    hosts:
       -
         name: a1
         image: sureshkvl/host:latest
-        network: n1
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:01
+            ip: 10.20.20.2/24
         static_routes:
           - 
             subnet: 10.20.21.0/24
@@ -21,7 +21,11 @@ Topology:
       -
         name: a2
         image: sureshkvl/host:latest      
-        network: n1
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:02
+            ip: 10.20.20.3/24    
         static_routes:
           - 
             subnet: 10.20.21.0/24
@@ -29,7 +33,11 @@ Topology:
       -
         name: a3
         image: sureshkvl/host:latest    
-        network: n2
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:03
+            ip: 10.20.21.2/24
         static_routes:
           - 
             subnet: 10.20.20.0/24
@@ -37,7 +45,11 @@ Topology:
       -
         name: a4
         image: sureshkvl/host:latest  
-        network: n2
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:04
+            ip: 10.20.21.3/24        
         static_routes:
           - 
             subnet: 10.20.20.0/24
@@ -49,12 +61,10 @@ Topology:
         interfaces:
           -
             name: eth1
-            network: n1
-            ip: 10.20.20.1/24
+            ip: 10.20.20.1/24        
           -
             name: eth2
-            network: n2
-            ip: 172.1.1.1/24
+            ip: 172.1.1.1/24               
         static_routes:
           - 
             subnet: 10.20.21.0/24
@@ -65,11 +75,9 @@ Topology:
         interfaces:
           -
             name: eth1
-            network: n1
             ip: 10.20.21.1/24
           -
             name: eth2
-            network: n2
             ip: 172.1.1.2/24
         static_routes:
           - 
@@ -89,15 +97,19 @@ Topology:
       -
         switches:
           - switch1
-        nodes:
+        hosts:
           - name: a1
+            interface: eth1
           - name: a2
+            interface: eth1
       -
         switches:
           - switch2
-        nodes:
+        hosts:
           - name: a3
+            interface: eth1
           - name: a4
+            interface: eth1
       -
         switches:
           - switch1
@@ -119,14 +131,15 @@ Topology:
           - 
             name: R1
             interface: eth2
+            qos: q1
           - 
             name: R2
             interface: eth2
-    networks:
+            qos: q1
+    qos:
       -
-        name: n1
-        subnet: 10.20.20.0/24
-      -
-        name: n2
-        subnet: 10.20.21.0/24
-
+        name: q1
+        bandwidth: 100Mbps
+        latency: 50ms
+        jitter: 1ms
+        pktloss: 0.1%

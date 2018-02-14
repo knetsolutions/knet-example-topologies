@@ -1,0 +1,53 @@
+Topology:
+    name : Single Network Topology
+    description: |
+      This topology consists of 2 hosts, 1 server, and a switch. 
+      All are connected to a same switch.
+    hosts:
+      -
+        name: host1
+        image: sureshkvl/host:latest
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:01
+            ip: 10.1.1.2/24
+      -
+        name: host2
+        image: sureshkvl/host:latest
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:02
+            ip: 10.1.1.3/24
+    servers:
+      -
+        name: server1
+        image: sureshkvl/web:latest
+        interfaces:
+          -
+            name: eth1
+            mac: 00:00:00:00:00:03
+            ip: 10.1.1.4/24
+    switches:
+      -
+        name: switch1
+        datapathid: 1001
+    links:
+      -
+        switches:
+          - switch1
+        hosts:
+          - 
+            name: host1
+            interface: eth1
+          -
+            name: host2
+            interface: eth1          
+      -
+        switches:
+          - switch1
+        servers:
+          - 
+            name: server1
+            interface: eth1

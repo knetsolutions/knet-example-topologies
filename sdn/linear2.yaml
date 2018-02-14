@@ -1,91 +1,107 @@
+
 Topology:
-    name : Full Mesh Topology
+    name : Linear Topology 2
     version: 1.0
     description: |
       This topology consists of 4 nodes, and four switches. 
       Each node is connected in each switch. Also these switches are
-      interconnected with each other to form a full mesh.
+      connected linearly and no loop. 
     controller:
       url: tcp:0.0.0.0:6633
     openflow:
       version: 1.3      
-    nodes:
+    hosts:
       -
         name: a1
         image: sureshkvl/host:latest
-        network: n1        
+        interfaces:
+          -
+            name: eth1
+            ip: 10.1.1.2/24
+            mac: 00:00:00:00:00:01
       -
         name: a2
-        image: sureshkvl/host:latest      
-        network: n1        
+        image: sureshkvl/host:latest        
+        interfaces:
+          -
+            name: eth1
+            ip: 10.1.1.3/24
+            mac: 00:00:00:00:00:02
       -
         name: a3
         image: sureshkvl/host:latest   
-        network: n1        
+        interfaces:
+          -
+            name: eth1
+            ip: 10.1.1.4/24
+            mac: 00:00:00:00:00:03        
       -
         name: a4
         image: sureshkvl/host:latest  
-        network: n1        
+        interfaces:
+          -
+            name: eth1
+            ip: 10.1.1.5/24
+            mac: 00:00:00:00:00:04
+
     switches:
       -
         name: switch1
+        datapathid: 1
       -
         name: switch2
+        datapathid: 2
       -
         name: switch3
+        datapathid: 3
       -
         name: switch4
+        datapathid: 4
     links:
       -
         switches:
           - switch1
-        nodes:
+        hosts:
           - 
             name: a1
+            interface: eth1
       -        
         switches:
           - switch2
-        nodes:
+        hosts:
           - 
             name: a2
+            interface: eth1
       -
         switches:
           - switch3
-        nodes:
+        hosts:
           - 
             name: a3
+            interface: eth1
       -        
         switches:
           - switch4
-        nodes:
+        hosts:
           - 
             name: a4
+            interface: eth1
       -
         switches:
           - switch1
           - switch2          
       -
         switches:
-          - switch1
+          - switch2
           - switch3       
       -
         switches:
-          - switch1
-          - switch4       
-      -
-        switches:
-          - switch2
-          - switch3
-      -
-         switches:
-          - switch2
-          - switch4
-      - 
-         switches:
           - switch3
           - switch4
-
-    networks:
+    qos:
       -
-        name: n1
-        subnet: 10.20.20.0/24
+        name: q1
+        bandwidth: 100Mbps
+        latency: 1ms
+        jitter: 1ms
+        pktloss: 0.5%          
