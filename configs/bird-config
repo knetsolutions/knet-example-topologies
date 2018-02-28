@@ -1,0 +1,35 @@
+log syslog all;
+
+router id 1.1.1.1;
+protocol direct {
+    interface "*"; # Restrict network interfaces it works with
+}
+
+protocol kernel {
+    import all;
+    learn; # Learn all alien routes from the kernel
+    scan time 20; # Scan kernel routing table every 20 seconds
+    export all; # Default is export none
+}
+
+
+protocol device {
+    scan time 10; # Scan interfaces every 10 seconds
+}
+
+
+protocol ospf MyOSPF {
+     rfc1583compat yes;
+     area 0.0.0.0 {
+        stub no;
+       interface "eth1" {
+           hello 10;
+           retransmit 6;
+           cost 10;
+           transmit delay 5;
+           dead count 5;
+           wait 50;
+           type broadcast;
+       };
+    };
+}

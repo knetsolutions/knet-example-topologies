@@ -44,7 +44,7 @@ Topology:
     switches:
       -
         name: switch1
-        datapathid: 1001
+        datapathid: 1
     links:
       -
         switches:
