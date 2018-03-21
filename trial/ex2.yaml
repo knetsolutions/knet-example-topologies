@@ -5,16 +5,16 @@ Topology:
       All are connected to a same switch.
     hosts:
       -
-        name: h1
-        image: knet/host
+        name: host1
+        image: sureshkvl/host-alpine:latest
         interfaces:
           -
             name: eth1
             mac: 00:00:00:00:00:01
             ip: 10.1.1.2/24
       -
-        name: h2
-        image: knet/host
+        name: host2
+        image: sureshkvl/host-alpine:latest
         interfaces:
           -
             name: eth1
@@ -23,7 +23,7 @@ Topology:
     servers:
       -
         name: server1
-        image: knet/web
+        image: sureshkvl/web-alpine:latest
         interfaces:
           -
             name: eth1
@@ -39,10 +39,10 @@ Topology:
           - switch1
         hosts:
           - 
-            name: h1
+            name: host1
             interface: eth1
           -
-            name: h2
+            name: host2
             interface: eth1          
       -
         switches:

@@ -1,8 +1,8 @@
 Topology:
-    name : Simple WAN Topology with two Routers
+    name : Simple WAN Topology with three Routers
     version: 1.1
     description: |
-      This topology consists of 4 nodes, and two switches,two routers . 
+      This topology consists of  nodes, and two switches,two routers . 
       nodes a1,a2,Router R1 connected to Switch1.  a3,a4 , Router R2 connnected to Switch2.
       Router R1 & R2 are connected
     hosts:
@@ -16,8 +16,8 @@ Topology:
             ip: 10.20.20.2/24
         static_routes:
           - 
-            subnet: 10.20.21.0/24
-            via: 10.20.20.1
+            subnet: 0.0.0.0/0
+            via: 10.20.20.1            
       -
         name: a2
         image: knet/host      
@@ -28,8 +28,8 @@ Topology:
             ip: 10.20.20.3/24    
         static_routes:
           - 
-            subnet: 10.20.21.0/24
-            via: 10.20.20.1
+            subnet: 0.0.0.0/0
+            via: 10.20.20.1              
       -
         name: a3
         image: knet/host    
@@ -40,8 +40,8 @@ Topology:
             ip: 10.20.21.2/24
         static_routes:
           - 
-            subnet: 10.20.20.0/24
-            via: 10.20.21.1
+            subnet: 0.0.0.0/0
+            via: 10.20.21.1              
       -
         name: a4
         image: knet/host  
@@ -52,8 +52,8 @@ Topology:
             ip: 10.20.21.3/24        
         static_routes:
           - 
-            subnet: 10.20.20.0/24
-            via: 10.20.21.1
+            subnet: 0.0.0.0/0
+            via: 10.20.21.1  
     routers:
       -
         name: R1
@@ -127,15 +127,6 @@ Topology:
           - 
             name: R1
             interface: eth1
-            qos: q1
           - 
             name: R2
             interface: eth1
-            qos: q1
-    qos:
-      -
-        name: q1
-        bandwidth: 100Mbps
-        latency: 50ms
-        jitter: 1ms
-        pktloss: 0.1%
