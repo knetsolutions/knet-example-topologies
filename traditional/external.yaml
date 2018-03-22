@@ -11,24 +11,22 @@ Topology:
     hosts:
       -
         name: a1
-        image: sureshkvl/host:latest
+        image: knet/host
         interfaces:
           -
             name: eth0
             ip: 10.1.1.2/24
-            mac: 00:00:00:00:00:01
         static_routes:
           - 
             subnet: 0.0.0.0/0
             via: 10.1.1.1               
       -
         name: a2
-        image: sureshkvl/host:latest   
+        image: knet/host   
         interfaces:
           -
             name: eth0
             ip: 10.1.1.3/24
-            mac: 00:00:00:00:00:02
         static_routes:
           - 
             subnet: 0.0.0.0/0
@@ -36,12 +34,11 @@ Topology:
     routers:
       -
         name: router1
-        image: sureshkvl/router:latest
+        image: knet/router
         external: True
         interfaces:
           -
             name: eth1
-            mac: 00:00:00:00:00:03
             ip: 10.1.1.1/24
            
     switches:

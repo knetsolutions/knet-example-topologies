@@ -11,7 +11,7 @@ Topology:
     hosts:
       -
         name: a1
-        image: sureshkvl/host:latest
+        image: knet/host
         interfaces:
           -
             name: eth0
@@ -23,7 +23,7 @@ Topology:
             via: 10.1.1.1               
       -
         name: a2
-        image: sureshkvl/host:latest   
+        image: knet/host   
         interfaces:
           -
             name: eth0
@@ -36,7 +36,7 @@ Topology:
     routers:
       -
         name: router1
-        image: sureshkvl/router:latest
+        image: knet/router
         external: True
         interfaces:
           -

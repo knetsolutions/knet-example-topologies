@@ -13,7 +13,7 @@ Topology:
     hosts:
       -
         name: a1
-        image: sureshkvl/host:latest
+        image: knet/host
         interfaces:
           -
             name: eth1
@@ -21,7 +21,7 @@ Topology:
             mac: 00:00:00:00:00:01       
       -
         name: a2
-        image: sureshkvl/host:latest   
+        image: knet/host   
         interfaces:
           -
             name: eth1
@@ -29,7 +29,7 @@ Topology:
             mac: 00:00:00:00:00:02             
       -
         name: a3
-        image: sureshkvl/host:latest   
+        image: knet/host   
         interfaces:
           -
             name: eth1
@@ -38,7 +38,7 @@ Topology:
 
       -
         name: a4
-        image: sureshkvl/host:latest   
+        image: knet/host   
         interfaces:
           -
             name: eth1
@@ -47,7 +47,7 @@ Topology:
 
       -
         name: a5
-        image: sureshkvl/host:latest
+        image: knet/host
         interfaces:
           -
             name: eth1
@@ -56,7 +56,7 @@ Topology:
 
       -
         name: a6
-        image: sureshkvl/host:latest       
+        image: knet/host       
         interfaces:
           -
             name: eth1
@@ -65,7 +65,7 @@ Topology:
 
       -
         name: a7
-        image: sureshkvl/host:latest    
+        image: knet/host    
         interfaces:
           -
             name: eth1
@@ -74,7 +74,7 @@ Topology:
 
       -
         name: a8
-        image: sureshkvl/host:latest 
+        image: knet/host 
         interfaces:
           -
             name: eth1

@@ -12,11 +12,10 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:01
             ip: 10.20.20.2/24
         static_routes:
           - 
-            subnet: 10.20.21.0/24
+            subnet: 0.0.0.0/0
             via: 10.20.20.1
       -
         name: a2
@@ -24,11 +23,10 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:02
             ip: 10.20.20.3/24    
         static_routes:
           - 
-            subnet: 10.20.21.0/24
+            subnet: 0.0.0.0/0
             via: 10.20.20.1
       -
         name: a3
@@ -36,11 +34,10 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:03
             ip: 10.20.21.2/24
         static_routes:
           - 
-            subnet: 10.20.20.0/24
+            subnet: 0.0.0.0/0
             via: 10.20.21.1
       -
         name: a4
@@ -48,11 +45,10 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:04
             ip: 10.20.21.3/24        
         static_routes:
           - 
-            subnet: 10.20.20.0/24
+            subnet: 0.0.0.0/0
             via: 10.20.21.1
     routers:
       -
@@ -61,11 +57,9 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:05
             ip: 10.20.20.1/24        
           -
             name: eth1
-            mac: 00:00:00:00:00:06
             ip: 172.1.1.1/24               
       -
         name: R2
@@ -73,11 +67,9 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:07
             ip: 10.20.21.1/24
           -
             name: eth1
-            mac: 00:00:00:00:00:08
             ip: 172.1.1.2/24     
     switches:
       -

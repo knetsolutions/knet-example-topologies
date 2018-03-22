@@ -1,9 +1,8 @@
-# Todo
 Topology:
-    name : WAN Topology with Four Routers and Four nodes
+    name : WAN Topology2
     version: 1.1
     description: |
-      This topology consists of 
+      This topology consists of  4 Routers  in RING Topology.
     hosts:
       -
         name: a1
@@ -11,48 +10,44 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:01
-            ip: 10.20.10.2/24
+            ip: 10.10.10.2/24
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.20.10.1            
+            via: 10.10.10.1            
       -
         name: a2
         image: knet/host      
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:02
-            ip: 10.20.11.2/24    
+            ip: 10.10.10.3/24    
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.20.11.1              
+            via: 10.10.10.1              
       -
-        name: a3
+        name: b1
         image: knet/host    
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:03
-            ip: 10.20.12.2/24
+            ip: 172.10.10.2/24
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.20.12.1              
+            via: 172.10.10.1              
       -
-        name: a4
+        name: b2
         image: knet/host  
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:04
-            ip: 10.20.13.2/24        
+            ip: 172.10.10.3/24        
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.20.13.1  
+            via: 172.10.10.1  
     routers:
       -
         name: R1
@@ -60,78 +55,70 @@ Topology:
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:05
-            ip: 10.20.10.1/24        
+            ip: 10.10.10.1/24        
           -
             name: eth1
-            mac: 00:00:00:00:00:06
-            ip: 172.1.1.1/24   
+            ip: 192.168.1.1/24
           -
             name: eth2
-            mac: 00:00:00:00:00:06
-            ip: 172.1.2.1/24                           
-      -
-        name: R2
-        image: knet/router
-        interfaces:
-          -
-            name: eth0
-            mac: 00:00:00:00:00:07
-            ip: 10.20.11.1/24
-          -
-            name: eth1
-            mac: 00:00:00:00:00:08
-            ip: 172.1.2.2/24     
-          -
-            name: eth2
-            mac: 00:00:00:00:00:06
-            ip: 172.1.3.1/24              
-      -
-        name: R3
-        image: knet/router
-        interfaces:
-          -
-            name: eth0
-            mac: 00:00:00:00:00:05
-            ip: 10.20.12.1/24        
-          -
-            name: eth1
-            mac: 00:00:00:00:00:06
-            ip: 172.1.3.2/24  
-          -
-            name: eth2
-            mac: 00:00:00:00:00:06
-            ip: 172.1.4.1/24            
+            ip: 192.168.2.1/24
       -
         name: R4
         image: knet/router
         interfaces:
           -
             name: eth0
-            mac: 00:00:00:00:00:05
-            ip: 10.20.13.1/24        
+            ip: 172.10.10.1/24
           -
             name: eth1
-            mac: 00:00:00:00:00:06
-            ip: 172.1.4.2/24   
+            ip: 192.168.3.1/24
+          -
+            name: eth2
+            ip: 192.168.4.1/24
+      -
+        name: R2
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 192.168.1.2/24
           -
             name: eth1
-            mac: 00:00:00:00:00:06
-            ip: 172.1.1.2/24                                      
+            ip: 192.168.3.2/24    
+      -
+        name: R3
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip:  192.168.2.2/24
+          -
+            name: eth1
+            ip: 192.168.4.2/24
+
     switches:
       -
-        name: switch1
+        name: sw1
         datapathid: 1001
       -
-        name: switch2
+        name: sw2
         datapathid: 1002
       -
-        name: switch3
-        datapathid: 1003        
+        name: wansw1
+        datapathid: 2001    
+      -
+        name: wansw2
+        datapathid: 2002
+      -
+        name: wansw3
+        datapathid: 2003   
+      -
+        name: wansw4
+        datapathid: 2004                                
     links:
       -
         switches:
-          - switch1
+          - sw1
         hosts:
           - name: a1
             interface: eth0
@@ -139,33 +126,63 @@ Topology:
             interface: eth0
       -
         switches:
-          - switch2
+          - sw2
         hosts:
-          - name: a3
+          - name: b1
             interface: eth0
-          - name: a4
+          - name: b2
             interface: eth0
       -
         switches:
-          - switch1
+          - sw1
         routers:
           - 
             name: R1
             interface: eth0          
       -
         switches:
-          - switch2
+          - sw2
         routers:
           - 
-            name: R2
+            name: R4
             interface: eth0      
       -
         switches:
-          - switch3
+          - wansw1
         routers:
           - 
             name: R1
             interface: eth1
           - 
             name: R2
+            interface: eth0
+      -
+        switches:
+          - wansw2
+        routers:
+          - 
+            name: R4
             interface: eth1
+          - 
+            name: R2
+            interface: eth1            
+      -
+        switches:
+          - wansw3
+        routers:
+          - 
+            name: R1
+            interface: eth2
+          - 
+            name: R3
+            interface: eth0 
+      -
+        switches:
+          - wansw4
+        routers:
+          - 
+            name: R3
+            interface: eth1
+          - 
+            name: R4
+            interface: eth2

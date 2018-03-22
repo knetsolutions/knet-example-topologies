@@ -9,16 +9,14 @@ Topology:
         image: knet/host
         interfaces:
           -
-            name: eth1
-            mac: 00:00:00:00:00:01
+            name: eth0
             ip: 10.1.1.2/24
       -
         name: h2
         image: knet/host
         interfaces:
           -
-            name: eth1
-            mac: 00:00:00:00:00:02
+            name: eth0
             ip: 10.1.1.3/24
     servers:
       -
@@ -26,8 +24,7 @@ Topology:
         image: knet/web
         interfaces:
           -
-            name: eth1
-            mac: 00:00:00:00:00:03
+            name: eth0
             ip: 10.1.1.4/24
     switches:
       -
@@ -40,14 +37,14 @@ Topology:
         hosts:
           - 
             name: h1
-            interface: eth1
+            interface: eth0
           -
             name: h2
-            interface: eth1          
+            interface: eth0          
       -
         switches:
           - switch1
         servers:
           - 
             name: server1
-            interface: eth1
+            interface: eth0
