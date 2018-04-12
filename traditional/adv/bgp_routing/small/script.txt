@@ -1,0 +1,9 @@
+CreateTopology /home/suresh/learning/knetsolutions/knet-example-topologies/traditional/adv/bgp_routing/small/routing_small.yaml
+
+sudo docker cp RtrC_bird.conf Rtr-C:/etc/bird.conf
+sudo docker cp RtrD_bird.conf Rtr-D:/etc/bird.conf
+sudo docker cp RtrA_bird.conf Rtr-A:/etc/bird.conf
+sudo docker cp RtrB_bird.conf Rtr-B:/etc/bird.conf
+
+sudo docker cp agent.py Rtr-D:/.
+sudo docker cp agent.sh Rtr-D:/.

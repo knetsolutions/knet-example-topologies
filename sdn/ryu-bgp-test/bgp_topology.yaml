@@ -1,8 +1,10 @@
 Topology:
-    name : WAN Topology
+    name : BGP 4 Routers
     version: 1.1
     description: |
-      This topology consists of  6 Routers  (Partial Mesh).
+      This topology consists of  4 BGP Routers  (connected in Partial Mesh) 
+      and 4 hosts. Each Router is connected to one host(RtrA - a1, Rtr-B -b1, ....).
+      Router A have the management interface connected to the host machine(to talk to RYU).
     hosts:
       -
         name: a1
@@ -47,29 +49,7 @@ Topology:
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.4.1.1  
-      -
-        name: e1
-        image: knet/host  
-        interfaces:
-          -
-            name: eth0
-            ip: 10.5.1.2/24        
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 10.5.1.1              
-      -
-        name: f1
-        image: knet/host  
-        interfaces:
-          -
-            name: eth0
-            ip: 10.6.1.2/24        
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 10.6.1.1              
+            via: 10.4.1.1        
     routers:
       -
         name: Rtr-A
@@ -77,90 +57,59 @@ Topology:
         mgmt-if: True
         interfaces:
           -
-            name: eth0
+            name: eth1
             ip: 10.1.1.1/24        
           -
-            name: eth1
+            name: eth2
             ip: 192.168.1.1/24
           -
-            name: eth2
+            name: eth3
             ip: 192.168.2.1/24
+          -
+            name: eth4
+            ip: 192.168.5.1/24
       -
         name: Rtr-B
         image: knet/router
-        mgmt-if: True
         interfaces:
           -
-            name: eth0
+            name: eth1
             ip: 10.2.1.1/24
           -
-            name: eth1
+            name: eth2
             ip: 192.168.2.2/24
           -
-            name: eth2
-            ip: 192.168.3.1/24
-          -
             name: eth3
-            ip: 192.168.7.1/24            
+            ip: 192.168.3.1/24         
       -
         name: Rtr-C
         image: knet/router
-        mgmt-if: True
         interfaces:
           -
-            name: eth0
+            name: eth1
             ip: 10.3.1.1/24
           -
-            name: eth1
-            ip: 192.168.4.1/24    
-          -
             name: eth2
-            ip: 192.168.1.2/24                
+            ip: 192.168.3.2/24    
+          -
+            name: eth3
+            ip: 192.168.4.1/24   
+          -
+            name: eth4
+            ip: 192.168.5.2/24                
       -
         name: Rtr-D
-        image: knet/router
-        mgmt-if: true
+        image: knet/router-py
         interfaces:
           -
-            name: eth0
-            ip:  10.4.1.1/24
-          -
             name: eth1
-            ip: 192.168.5.1/24
+            ip:  10.4.1.1/24
           -
             name: eth2
             ip: 192.168.4.2/24
           -
             name: eth3
-            ip: 192.168.7.2/24    
-      -
-        name: Rtr-E
-        image: knet/router
-        mgmt-if: true
-        interfaces:
-          -
-            name: eth0
-            ip: 10.5.1.1/24
-          -
-            name: eth1
-            ip: 192.168.6.1/24    
-          -
-            name: eth2
-            ip: 192.168.5.2/24 
-      -
-        name: Rtr-F
-        image: knet/router
-        mgmt-if: true
-        interfaces:
-          -
-            name: eth0
-            ip:  10.6.1.1/24
-          -
-            name: eth1
-            ip: 192.168.3.2/24
-          -
-            name: eth2
-            ip: 192.168.6.2/24             
+            ip: 192.168.1.2/24
     switches:
       -
         name: sw1
@@ -171,10 +120,6 @@ Topology:
       -
         name: sw4
       -
-        name: sw5
-      -
-        name: sw6
-      -
         name: wansw1
       -
         name: wansw2
@@ -184,10 +129,7 @@ Topology:
         name: wansw4
       -
         name: wansw5
-      -
-        name: wansw6
-      -
-        name: wansw7
+
     links:
       -
         switches:
@@ -213,89 +155,62 @@ Topology:
         hosts:
           - name: d1
             interface: eth0
-      -
-        switches:
-          - sw5
-        hosts:
-          - name: e1
-            interface: eth0
-      -
-        switches:
-          - sw6
-        hosts:
-          - name: f1
-            interface: eth0            
+    
       -
         switches:
           - sw1
         routers:
           - 
             name: Rtr-A
-            interface: eth0          
+            interface: eth1     
       -
         switches:
           - sw2
         routers:
           - 
             name: Rtr-B
-            interface: eth0      
+            interface: eth1      
       -
         switches:
           - sw3
         routers:
           - 
             name: Rtr-C
-            interface: eth0          
+            interface: eth1          
       -
         switches:
           - sw4
         routers:
           - 
             name: Rtr-D
-            interface: eth0     
-      -
-        switches:
-          - sw5
-        routers:
-          - 
-            name: Rtr-E
-            interface: eth0          
-      -
-        switches:
-          - sw6
-        routers:
-          - 
-            name: Rtr-F
-            interface: eth0     
-
-
+            interface: eth1     
       -
         switches:
           - wansw1
         routers:
           - 
             name: Rtr-A
-            interface: eth1
+            interface: eth3
           - 
-            name: Rtr-C
+            name: Rtr-B
             interface: eth2
       -
         switches:
           - wansw2
         routers:
           - 
-            name: Rtr-A
-            interface: eth2
-          - 
             name: Rtr-B
-            interface: eth1            
+            interface: eth3
+          - 
+            name: Rtr-C
+            interface: eth2
       -
         switches:
           - wansw3
         routers:
           - 
             name: Rtr-C
-            interface: eth1
+            interface: eth3
           - 
             name: Rtr-D
             interface: eth2 
@@ -304,38 +219,19 @@ Topology:
           - wansw4
         routers:
           - 
-            name: Rtr-B
-            interface: eth2
+            name: Rtr-D
+            interface: eth3
           - 
-            name: Rtr-F
-            interface: eth1
+            name: Rtr-A
+            interface: eth2
       -
         switches:
           - wansw5
         routers:
           - 
-            name: Rtr-F
-            interface: eth2
+            name: Rtr-A
+            interface: eth4
           - 
-            name: Rtr-E
-            interface: eth1
-      -
-        switches:
-          - wansw6
-        routers:
-          - 
-            name: Rtr-E
-            interface: eth2
-          - 
-            name: Rtr-D
-            interface: eth1
-      -
-        switches:
-          - wansw7
-        routers:
-          - 
-            name: Rtr-D
-            interface: eth3
-          - 
-            name: Rtr-B
-            interface: eth3
+            name: Rtr-C
+            interface: eth4
+
