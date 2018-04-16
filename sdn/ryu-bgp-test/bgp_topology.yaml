@@ -99,7 +99,7 @@ Topology:
             ip: 192.168.5.2/24                
       -
         name: Rtr-D
-        image: knet/router-py
+        image: knet/router
         interfaces:
           -
             name: eth1
