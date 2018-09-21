@@ -2,8 +2,9 @@ Topology:
     name : Simple WAN Topology with two Routers
     version: 1.1
     description: |
-      This topology consists of 4 nodes, and two switches,one router . 
-      nodes a1,a2,Router R1 connected to Switch1.  a3,a4 , Router R1 connnected to Switch2.
+      This topology consists of 4 nodes, and two switches,two routers . 
+      nodes a1,a2,Router R1 connected to Switch1.  a3,a4 , Router R2 connnected to Switch2.
+      Router R1 & R2 are connected
     hosts:
       -
         name: a1
@@ -59,14 +60,27 @@ Topology:
             ip: 10.20.20.1/24        
           -
             name: eth1
-            ip: 10.20.21.1/24 
+            ip: 172.1.1.1/24               
+      -
+        name: R2
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 10.20.21.1/24
+          -
+            name: eth1
+            ip: 172.1.1.2/24     
     switches:
       -
         name: switch1
         datapathid: 1001
       -
         name: switch2
-        datapathid: 1002     
+        datapathid: 1002
+      -
+        name: switch3
+        datapathid: 1003        
     links:
       -
         switches:
@@ -96,5 +110,24 @@ Topology:
           - switch2
         routers:
           - 
+            name: R2
+            interface: eth0      
+      -
+        switches:
+          - switch3
+        routers:
+          - 
             name: R1
             interface: eth1
+            qos: q1
+          - 
+            name: R2
+            interface: eth1
+            qos: q1
+    qos:
+      -
+        name: q1
+        bandwidth: 100Mbps
+        latency: 50ms
+        jitter: 1ms
+        pktloss: 0.1%
