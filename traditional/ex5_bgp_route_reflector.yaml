@@ -85,7 +85,7 @@ Topology:
         name: lansw2
         datapathid: 1002
       -
-        name: lansw1
+        name: lansw3
         datapathid: 2001    
       -
         name: wansw1

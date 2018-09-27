@@ -1,0 +1,68 @@
+Topology:
+    name : two routers
+    version: 1.1
+    description: |
+      This topology consists of  4 Routers  in RING Topology.    
+    hosts:
+      -
+        name: a1
+        image: knet/host
+        interfaces:
+          -
+            name: eth0
+            ip: 10.10.10.2/24
+        static_routes:
+          - 
+            subnet: 0.0.0.0/0
+            via: 10.10.10.1    
+    switches:
+      -
+        name: s1
+        datapathid: 1001   
+      -
+        name: s2
+        datapathid: 1002    
+    routers:
+      -
+        name: R1
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 10.20.20.1/24                    
+          -
+            name: eth1
+            ip: 10.10.10.1/24  
+      -
+        name: R2
+        image: knet/exabgp-py3
+        interfaces:
+          -
+            name: eth0
+            ip: 10.20.20.2/24       
+    links:
+      -
+        switches:
+          - s2
+        hosts:
+          - 
+            name: a1
+            interface: eth0
+
+      -
+        switches:
+          - s2
+        routers:
+          - 
+            name: R1
+            interface: eth1
+      -
+        switches:
+          - s1
+        routers:
+          - 
+            name: R1
+            interface: eth0          
+          - 
+            name: R2
+            interface: eth0

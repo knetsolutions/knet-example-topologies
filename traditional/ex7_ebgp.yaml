@@ -10,33 +10,44 @@ Topology:
         interfaces:
           -
             name: eth0
-            ip: 10.1.1.2/24
+            ip: 10.10.10.2/24
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.1.1.1            
+            via: 10.10.10.1            
       -
-        name: b1
+        name: a2
         image: knet/host      
         interfaces:
           -
             name: eth0
-            ip: 10.2.1.2/24    
+            ip: 10.10.10.3/24    
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.2.1.1              
+            via: 10.10.10.1              
       -
-        name: c1
+        name: b1
         image: knet/host    
         interfaces:
           -
             name: eth0
-            ip: 10.3.1.2/24
+            ip: 172.10.10.2/24
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.3.1.1              
+            via: 172.10.10.1              
+      -
+        name: b2
+        image: knet/host  
+        interfaces:
+          -
+            name: eth0
+            ip: 172.10.10.3/24        
+        static_routes:
+          - 
+            subnet: 0.0.0.0/0
+            via: 172.10.10.1  
     routers:
       -
         name: R1
@@ -44,7 +55,7 @@ Topology:
         interfaces:
           -
             name: eth0
-            ip: 10.1.1.1/24        
+            ip: 10.10.10.1/24        
           -
             name: eth1
             ip: 192.168.1.1/24
@@ -52,87 +63,89 @@ Topology:
             name: eth2
             ip: 192.168.2.1/24
       -
+        name: R4
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.10.10.1/24
+          -
+            name: eth1
+            ip: 192.168.3.1/24
+          -
+            name: eth2
+            ip: 192.168.4.1/24
+      -
         name: R2
         image: knet/router
         interfaces:
           -
             name: eth0
-            ip: 10.2.1.1/24
-          -
-            name: eth1
             ip: 192.168.1.2/24
           -
-            name: eth2
-            ip: 192.168.3.2/24
+            name: eth1
+            ip: 192.168.3.2/24    
       -
         name: R3
         image: knet/router
         interfaces:
           -
             name: eth0
-            ip: 10.3.1.1/24
+            ip:  192.168.2.2/24
           -
             name: eth1
-            ip: 192.168.2.2/24
-          -
-            name: eth2
-            ip: 192.168.3.1/24    
+            ip: 192.168.4.2/24
+
     switches:
       -
-        name: lansw1
+        name: sw1
         datapathid: 1001
       -
-        name: lansw2
+        name: sw2
         datapathid: 1002
       -
-        name: lansw1
+        name: wansw1
         datapathid: 2001    
       -
-        name: wansw1
+        name: wansw2
         datapathid: 2002
       -
-        name: wansw2
+        name: wansw3
         datapathid: 2003   
+      -
+        name: wansw4
+        datapathid: 2004                                
     links:
       -
         switches:
-          - lansw1
+          - sw1
         hosts:
           - name: a1
             interface: eth0
-      -
-        switches:
-          - lansw1
-        routers:
-          - 
-            name: R1
+          - name: a2
             interface: eth0
       -
         switches:
-          - lansw2
+          - sw2
         hosts:
           - name: b1
             interface: eth0
+          - name: b2
+            interface: eth0
       -
         switches:
-          - lansw2
+          - sw1
         routers:
           - 
-            name: R2
-            interface: eth0
+            name: R1
+            interface: eth0          
       -
         switches:
-          - lansw3
-        hosts:
-          - name: c1
-            interface: eth0
-      -
-        switches:
-          - lansw3
+          - sw2
         routers:
           - 
-            name: R3
-            interface: eth0
+            name: R4
+            interface: eth0      
       -
         switches:
           - wansw1
@@ -142,14 +155,34 @@ Topology:
             interface: eth1
           - 
             name: R2
-            interface: eth1
+            interface: eth0
       -
         switches:
           - wansw2
+        routers:
+          - 
+            name: R4
+            interface: eth1
+          - 
+            name: R2
+            interface: eth1            
+      -
+        switches:
+          - wansw3
         routers:
           - 
             name: R1
             interface: eth2
           - 
             name: R3
+            interface: eth0 
+      -
+        switches:
+          - wansw4
+        routers:
+          - 
+            name: R3
             interface: eth1
+          - 
+            name: R4
+            interface: eth2

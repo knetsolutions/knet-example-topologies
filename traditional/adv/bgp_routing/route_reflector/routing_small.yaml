@@ -1,8 +1,8 @@
 Topology:
-    name : Routers Example1
+    name : WAN Topology
     version: 1.1
     description: |
-      This topology consists of  4 Routers 
+      This topology consists of  3 Routers  (Partial Mesh).
     hosts:
       -
         name: a1
@@ -37,10 +37,11 @@ Topology:
           - 
             subnet: 0.0.0.0/0
             via: 10.3.1.1              
+    
     routers:
       -
-        name: R1
-        image: knet/router
+        name: Rtr-A
+        image: knet/router-py
         interfaces:
           -
             name: eth0
@@ -48,12 +49,9 @@ Topology:
           -
             name: eth1
             ip: 192.168.1.1/24
-          -
-            name: eth2
-            ip: 192.168.2.1/24
       -
-        name: R2
-        image: knet/router
+        name: Rtr-B
+        image: knet/router-py
         interfaces:
           -
             name: eth0
@@ -63,93 +61,87 @@ Topology:
             ip: 192.168.1.2/24
           -
             name: eth2
-            ip: 192.168.3.2/24
+            ip: 192.168.2.2/24         
       -
-        name: R3
-        image: knet/router
+        name: Rtr-C
+        image: knet/router-py
         interfaces:
           -
             name: eth0
             ip: 10.3.1.1/24
           -
             name: eth1
-            ip: 192.168.2.2/24
-          -
-            name: eth2
-            ip: 192.168.3.1/24    
+            ip: 192.168.2.1/24                 
     switches:
       -
-        name: lansw1
-        datapathid: 1001
+        name: sw1
       -
-        name: lansw2
-        datapathid: 1002
+        name: sw2
       -
-        name: lansw1
-        datapathid: 2001    
+        name: sw3
       -
         name: wansw1
-        datapathid: 2002
       -
         name: wansw2
-        datapathid: 2003   
+
     links:
       -
         switches:
-          - lansw1
+          - sw1
         hosts:
           - name: a1
             interface: eth0
       -
         switches:
-          - lansw1
-        routers:
-          - 
-            name: R1
-            interface: eth0
-      -
-        switches:
-          - lansw2
+          - sw2
         hosts:
           - name: b1
             interface: eth0
       -
         switches:
-          - lansw2
-        routers:
-          - 
-            name: R2
-            interface: eth0
-      -
-        switches:
-          - lansw3
+          - sw3
         hosts:
           - name: c1
             interface: eth0
       -
         switches:
-          - lansw3
+          - sw1
         routers:
           - 
-            name: R3
-            interface: eth0
+            name: Rtr-A
+            interface: eth0    
+      -
+        switches:
+          - sw2
+        routers:
+          - 
+            name: Rtr-B
+            interface: eth0      
+      -
+        switches:
+          - sw3
+        routers:
+          - 
+            name: Rtr-C
+            interface: eth0            
       -
         switches:
           - wansw1
         routers:
           - 
-            name: R1
+            name: Rtr-A
             interface: eth1
           - 
-            name: R2
+            name: Rtr-B
             interface: eth1
       -
         switches:
           - wansw2
         routers:
           - 
-            name: R1
+            name: Rtr-B
             interface: eth2
           - 
-            name: R3
+            name: Rtr-C
             interface: eth1
+

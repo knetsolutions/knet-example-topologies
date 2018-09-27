@@ -85,7 +85,7 @@ Topology:
         name: lansw2
         datapathid: 1002
       -
-        name: lansw1
+        name: lansw3
         datapathid: 2001    
       -
         name: wansw1
@@ -93,6 +93,9 @@ Topology:
       -
         name: wansw2
         datapathid: 2003   
+      -
+        name: wansw3
+        datapathid: 2004                                
     links:
       -
         switches:
@@ -153,3 +156,13 @@ Topology:
           - 
             name: R3
             interface: eth1
+      -
+        switches:
+          - wansw3
+        routers:
+          - 
+            name: R2
+            interface: eth2
+          - 
+            name: R3
+            interface: eth2

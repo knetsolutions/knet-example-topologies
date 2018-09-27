@@ -1,9 +1,11 @@
-CreateTopology /home/suresh/learning/knetsolutions/knet-example-topologies/traditional/adv/bgp_routing/small/routing_small.yaml
+CreateTopology /home/suresh/learning/knetsolutions/knet-example-topologies/traditional/adv/bgp_routing/big/routing_big.yaml
 
 sudo docker cp RtrC_bird.conf Rtr-C:/etc/bird.conf
 sudo docker cp RtrD_bird.conf Rtr-D:/etc/bird.conf
 sudo docker cp RtrA_bird.conf Rtr-A:/etc/bird.conf
 sudo docker cp RtrB_bird.conf Rtr-B:/etc/bird.conf
+sudo docker cp RtrE_bird.conf Rtr-E:/etc/bird.conf
+sudo docker cp RtrF_bird.conf Rtr-F:/etc/bird.conf
 
 sudo docker cp agent.py Rtr-D:/.
 sudo docker cp agent.sh Rtr-D:/.
@@ -17,15 +19,32 @@ sudo docker cp agent.sh Rtr-B:/.
 sudo docker cp agent.py Rtr-A:/.
 sudo docker cp agent.sh Rtr-A:/.
 
+sudo docker cp agent.py Rtr-E:/.
+sudo docker cp agent.sh Rtr-E:/.
+sudo docker cp agent.py Rtr-F:/.
+sudo docker cp agent.sh Rtr-F:/.
 
 sudo docker exec -it Rtr-A sh
  bird -c /etc/bird.conf
+ ./agent.sh
 
 sudo docker exec -it Rtr-B sh
  bird -c /etc/bird.conf
+ ./agent.sh
 
  sudo docker exec -it Rtr-C sh
  bird -c /etc/bird.conf
+ ./agent.sh
 
  sudo docker exec -it Rtr-D sh
  bird -c /etc/bird.conf
+ ./agent.sh
+
+
+ sudo docker exec -it Rtr-E sh
+ bird -c /etc/bird.conf
+ ./agent.sh
+
+  sudo docker exec -it Rtr-F sh
+ bird -c /etc/bird.conf 
+  ./agent.sh
