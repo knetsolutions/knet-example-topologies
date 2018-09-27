@@ -8,7 +8,7 @@ Todo
 ### a). Single Switch
 
 
-**Topology file [ex1_switch1.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex1_switch.yaml)**
+**Topology file [ex1_switch1.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex1_switch1.yaml)**
 
 
 ### b). MultiSwitch environment
@@ -27,7 +27,7 @@ Todo
 
 Todo
 
-**Topology file [ex3_router1.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex3_router.yaml)**
+**Topology file [ex3_router1.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex3_router1.yaml)**
 
 
 ## 4. Routing - OSPF
