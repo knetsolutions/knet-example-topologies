@@ -14,40 +14,18 @@ Topology:
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 10.10.10.1            
-      -
-        name: a2
-        image: knet/host      
-        interfaces:
-          -
-            name: eth0
-            ip: 10.10.10.3/24    
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 10.10.10.1              
+            via: 10.10.10.1                        
       -
         name: b1
         image: knet/host    
         interfaces:
           -
             name: eth0
-            ip: 172.10.10.2/24
+            ip: 10.10.20.2/24
         static_routes:
           - 
             subnet: 0.0.0.0/0
-            via: 172.10.10.1              
-      -
-        name: b2
-        image: knet/host  
-        interfaces:
-          -
-            name: eth0
-            ip: 172.10.10.3/24        
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 172.10.10.1  
+            via: 10.10.20.1              
     routers:
       -
         name: R1
@@ -68,7 +46,7 @@ Topology:
         interfaces:
           -
             name: eth0
-            ip: 172.10.10.1/24
+            ip: 10.10.20.1/24
           -
             name: eth1
             ip: 192.168.3.1/24
@@ -122,15 +100,11 @@ Topology:
         hosts:
           - name: a1
             interface: eth0
-          - name: a2
-            interface: eth0
       -
         switches:
           - sw2
         hosts:
           - name: b1
-            interface: eth0
-          - name: b2
             interface: eth0
       -
         switches:
