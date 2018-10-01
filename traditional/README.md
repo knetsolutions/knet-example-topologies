@@ -16,12 +16,11 @@ Todo
 
 ### b). MultiSwitch environment
 
-Todo
 
 
-## 2. Routing Introduction
 
-Todo
+## 2. Routing Introduction
+
 
 
 ![Topology Diagram](imgs/ex2_router.jpg?raw=true) 
@@ -33,7 +32,7 @@ Todo
 
 ## 3. Routing - Static Routes
 
-Todo
+
 
 
 ![Topology Diagram](imgs/ex3_router1.jpg?raw=true) 
@@ -49,7 +48,6 @@ Todo
 
 ## 4. Routing - OSPF
 
-Todo
 
 ### a). Single area
 
@@ -71,7 +69,7 @@ Todo
 
 ## 5. Routing - BGP
 
-Todo
+
 
 ### a). IBGP
 
