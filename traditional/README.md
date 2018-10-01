@@ -60,7 +60,13 @@ Todo
 
 ### b). Mutli area
 
-Todo
+![Topology Diagram](imgs/ex4_ospf2.jpg?raw=true) 
+
+
+**Topology file [ex4_ospf2.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex4_ospf2.yaml)**
+
+
+**Bird configuration files [ex4_ospf2](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/bird_configs/ex4_ospf2)**
 
 
 ## 5. Routing - BGP

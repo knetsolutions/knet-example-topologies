@@ -1,13 +1,11 @@
 Topology:
-    name : Simple WAN Topology with two Routers
+    name : OSPF Multiarea topology
     version: 1.1
     description: |
-      This topology consists of 4 nodes, and two switches,two routers . 
-      nodes a1,a2,Router R1 connected to Switch1.  a3,a4 , Router R2 connnected to Switch2.
-      Router R1 & R2 are connected
+      This topology consists of 10 routers. 
     hosts:
       -
-        name: a1
+        name: host1
         image: knet/host
         interfaces:
           -
@@ -18,7 +16,7 @@ Topology:
             subnet: 0.0.0.0/0
             via: 10.10.10.1
       -
-        name: b1
+        name: host2
         image: knet/host      
         interfaces:
           -
@@ -28,147 +26,204 @@ Topology:
           - 
             subnet: 0.0.0.0/0
             via: 10.10.20.1
-      -
-        name: c1
-        image: knet/host    
-        interfaces:
-          -
-            name: eth0
-            ip: 10.10.30.2/24
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 10.10.30.1
-      -
-        name: d1
-        image: knet/host  
-        interfaces:
-          -
-            name: eth0
-            ip: 10.10.40.2/24        
-        static_routes:
-          - 
-            subnet: 0.0.0.0/0
-            via: 10.10.40.1
     routers:
       -
-        name: R1
+        name: R_A
         image: knet/router
-        interfaces:
+        interfaces:       
           -
             name: eth0
-            ip: 10.10.10.1/24        
-          -
-            name: eth1
             ip: 172.1.1.1/24               
       -
-        name: R2
+        name: R_B
         image: knet/router
         interfaces:
           -
             name: eth0
-            ip: 10.10.20.1/24
-          -
-            name: eth1
             ip: 172.1.1.2/24     
       -
-        name: R3
+        name: R_C
         image: knet/router
-        interfaces:
+        interfaces:        
           -
             name: eth0
-            ip: 10.10.30.1/24        
-          -
-            name: eth1
             ip: 172.1.1.3/24               
+          -
+            name: eth1
+            ip: 10.10.10.1/24 
       -
-        name: R4
+        name: R_D
         image: knet/router
         interfaces:
           -
             name: eth0
-            ip: 10.10.40.1/24
+            ip: 172.1.1.4/24    
           -
             name: eth1
-            ip: 172.1.1.4/24                
+            ip: 172.1.2.1/24    
+      -
+        name: R_E
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.2.2/24    
+          -
+            name: eth1
+            ip: 172.1.3.1/24   
+      -
+        name: R_F
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.3.2/24    
+          -
+            name: eth1
+            ip: 172.1.4.1/24   
+      -
+        name: R_G
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.4.2/24    
+          -
+            name: eth1
+            ip: 172.1.5.1/24   
+      -
+        name: R_H
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.5.2/24  
+      -
+        name: R_I
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.5.3/24  
+          -
+            name: eth1
+            ip: 10.10.20.1/24 
+      -
+        name: R_J
+        image: knet/router
+        interfaces:
+          -
+            name: eth0
+            ip: 172.1.5.4/24  
+
     switches:
       -
-        name: switch1
+        name: lansw1
         datapathid: 1001
       -
-        name: switch2
+        name: lansw2
         datapathid: 1002
       -
-        name: switch3
+        name: wansw1
         datapathid: 1003 
       -
-        name: switch4
+        name: wansw2
         datapathid: 1004   
       -
-        name: wanswitch1
-        datapathid: 1005                      
+        name: wansw3
+        datapathid: 1005 
+      -
+        name: wansw4
+        datapathid: 1006 
+      -
+        name: wansw5
+        datapathid: 1007                                      
     links:
       -
         switches:
-          - switch1
+          - lansw1
         hosts:
-          - name: a1
+          - name: host1
             interface: eth0
       -
         switches:
-          - switch1
+          - lansw1
         routers:
           - 
-            name: R1
-            interface: eth0  
+            name: R_C
+            interface: eth1
       -
         switches:
-          - switch2
+          - lansw2
         hosts:
-          - name: b1
+          - name: host2
             interface: eth0
       -
         switches:
-          - switch2
+          - lansw2
         routers:
           - 
-            name: R2
+            name: R_I
+            interface: eth1
+      -
+        switches:
+          - wansw1
+        routers:
+          - 
+            name: R_A
+            interface: eth0  
+          - 
+            name: R_B
+            interface: eth0  
+          - 
+            name: R_C
+            interface: eth0  
+          - 
+            name: R_D
+            interface: eth0                                      
+      -
+        switches:
+          - wansw2
+        routers:
+          - 
+            name: R_D
+            interface: eth1
+          - 
+            name: R_E
             interface: eth0  
       -
         switches:
-          - switch3
-        hosts:
-          - name: c1
+          - wansw3
+        routers:
+          - 
+            name: R_E
+            interface: eth1
+          - 
+            name: R_F
+            interface: eth0 
+      -
+        switches:
+          - wansw4
+        routers:
+          - 
+            name: R_F
+            interface: eth1
+          - 
+            name: R_G
+            interface: eth0 
+      -
+        switches:
+          - wansw5
+        routers:
+          - 
+            name: R_G
+            interface: eth1
+          - 
+            name: R_H
+            interface: eth0 
+          - 
+            name: R_I
             interface: eth0
-      -
-        switches:
-          - switch3
-        routers:
           - 
-            name: R3
-            interface: eth0  
-      -
-        switches:
-          - switch4
-        hosts:
-          - name: d1
-            interface: eth0
-      -
-        switches:
-          - switch4
-        routers:
-          - 
-            name: R4
-            interface: eth0  
-      -
-        switches:
-          - wanswitch1
-        routers:
-          - name: R1
-            interface: eth1
-          - name: R2
-            interface: eth1
-          - name: R3
-            interface: eth1
-          - name: R4
-            interface: eth1
+            name: R_J
+            interface: eth0                        
