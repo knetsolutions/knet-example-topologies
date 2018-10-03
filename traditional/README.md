@@ -96,4 +96,10 @@ Todo
 
 ## 6. Route Redistribution (BGP & OSPF)
 
-Todo
+![Topology Diagram](imgs/ex6_route_redistribution.jpg?raw=true) 
+
+
+**Topology file [ex6_route_distribution.yaml](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/ex6_route_redistribution.yaml)**
+
+
+**Bird configuration files [ex6_route_distribution](https://github.com/knetsolutions/knet-example-topologies/blob/master/traditional/bird_configs/ex6_route_redistribution)**
