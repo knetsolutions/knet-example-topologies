@@ -69,7 +69,10 @@ ip route
 This exercises helps you to learn by manipulating the routing table by adding static route.
 
 ```
-sudo ip route add 10.20.21.0/24 dev eth1
+Example commands:
+
+sudo ip route add 10.20.21.0/24 via 172.1.1.2 dev eth1
+sudo ip route add 10.20.20.0/24 via 172.1.1.1 dev eth1
 ```
 
 ![Topology Diagram](imgs/ex3_router1.jpg?raw=true) 
